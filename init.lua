@@ -79,8 +79,6 @@ function Addon:OnInitialize()
         Addon.db.profile.swapGearAfterCombat = false;
     end
 
-    print("locale: ", Addon:GetLocale());
-
     LibStub("AceConfig-3.0"):RegisterOptionsTable("SpeedyMount", options);
     self:RegisterChatCommand("sm", "ChatCommand");
 end

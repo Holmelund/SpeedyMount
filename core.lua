@@ -1,6 +1,4 @@
 local name, SpeedyMount = ...;
-local L = LibStub("AceLocale-3.0"):GetLocale("SpeedyMount");
-
 local debug = false;
 
 --------------------------------------------------
