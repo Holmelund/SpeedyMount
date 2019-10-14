@@ -11,3 +11,5 @@ Examples:
  - /sm trinket [Carrot on a Stick]
  - /sm trinket carrot on a stick 
  - /sm trinket 11122
+
+Find SpeedyMount on CurseForge: https://www.curseforge.com/wow/addons/speedymount
