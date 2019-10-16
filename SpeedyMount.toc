@@ -1,7 +1,7 @@
 ## Interface: 11302
 ## Title: Speedy Mount
 ## Author: Lanaisha - Pyrewood Village
-## Version: 0.6 beta
+## Version: 0.7 beta
 ## Notes: Changes gear when mounted
 ## DefaultState: Enabled
 ## SavedVariables: SpeedyMountDB
