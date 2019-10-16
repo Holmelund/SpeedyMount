@@ -42,9 +42,12 @@ local function PerformItemChanges(input)
   elseif input == riding then
     items = Addon.db.profile.riding;
   end
-  
+
   if (input == normal and Addon.db.profile.inRidingGear) or (input == riding and not Addon.db.profile.inRidingGear) then
     for i, item in pairs(items) do
+      if debug then
+        print(item[1])
+      end
       
       if not IsEquippedItem(item[1]) then
         EquipItemByName(item[1], item[2]);
@@ -129,6 +132,8 @@ function HasMount()
       end
 
       PerformItemChanges(normal);
+
+      return;
     end
   end
 end
@@ -175,6 +180,11 @@ end
 SpeedyMount.SetTrinket = SetTrinket;
 
 function Reset()
+  if debug then
+    print("Reset in core. Is in riding gear: ", Addon.db.profile.inRidingGear);
+  end
+
+  Addon.db.profile.inRidingGear = true;
   PerformItemChanges(normal);
 end
 
