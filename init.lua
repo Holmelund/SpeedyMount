@@ -3,7 +3,7 @@ Addon = LibStub("AceAddon-3.0"):NewAddon("SpeedyMount", "AceConsole-3.0", "AceEv
 local name, SpeedyMount = ...;
 local options  = {
     name = "SpeedyMount",
-    handler = SpeedyMount,
+    handler = Addon,
     type = "group",
     args = {
         gloves = {
@@ -82,10 +82,6 @@ function Addon:OnInitialize()
 
     LibStub("AceConfig-3.0"):RegisterOptionsTable("SpeedyMount", options);
     self:RegisterChatCommand("sm", "ChatCommand");
-end
-
-function Addon:DisplayMessage(item, name)
-  return print("|cff1683d1SpeedyMount|r: ", item, " was updated to ", name);
 end
 
 function Addon:ChatCommand(input)
