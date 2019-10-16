@@ -117,7 +117,7 @@ function HasMount()
 
           PerformItemChanges(riding);
         end
-        
+
         return;
       else
         hasMount = false;
