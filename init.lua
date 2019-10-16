@@ -57,6 +57,7 @@ function Addon:OnEnable()
   
     -- Addon Loaded
     self:Print("Type /sm for Options");
+    SpeedyMount.HasMount();
 end
 
 function Addon:OnInitialize()
@@ -131,17 +132,17 @@ end
 ---  Getters and Setters
 --------------------------------------------------
 function Addon:SetGloves(_, value)
-    SpeedyMount.SetGloves(value);
+  SpeedyMount.SetGloves(value);
 end
 
 function Addon:SetBoots(_, value)
-    SpeedyMount.SetBoots(value);
+  SpeedyMount.SetBoots(value);
 end
 
 function Addon:SetTrinket(_, value)
-    SpeedyMount.SetTrinket(value);
+  SpeedyMount.SetTrinket(value);
 end
 
 function Addon:Reset()
-    SpeedyMount.Reset();
+  SpeedyMount.Reset();
 end
