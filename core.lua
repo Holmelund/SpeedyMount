@@ -140,6 +140,10 @@ end
 
 SpeedyMount.HasMount = HasMount;
 
+local function DisplayMessage(item, name)
+  return print("|cff1683d1SpeedyMount|r: ", item, " was updated to ", name);
+end
+
 --------------------------------------------------
 ---  Getters and Setters
 --------------------------------------------------
@@ -149,7 +153,7 @@ function SetGloves(value)
 
   if name ~= nil then
     Addon.db.profile.riding.gloves = { name, 10 };
-    SpeedyMount:DisplayMessage("Gloves", name);
+    DisplayMessage("Gloves", name);
   end
 end
 
@@ -161,7 +165,7 @@ function SetBoots(value)
 
   if name ~= nil then
     Addon.db.profile.riding.boots = { name, 8 };
-    SpeedyMount:DisplayMessage("Boots", name);
+    DisplayMessage("Boots", name);
   end
 end
 
@@ -173,7 +177,7 @@ function SetTrinket(value)
 
   if name ~= nil then
     Addon.db.profile.riding.trinket = { name, 14 };
-    SpeedyMount:DisplayMessage("Trinket", name);
+    DisplayMessage("Trinket", name);
   end
 end
 
