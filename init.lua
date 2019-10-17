@@ -1,10 +1,10 @@
-Addon = LibStub("AceAddon-3.0"):NewAddon("SpeedyMount", "AceConsole-3.0", "AceEvent-3.0");
+SpeedyMount = LibStub("AceAddon-3.0"):NewAddon("SpeedyMount", "AceConsole-3.0", "AceEvent-3.0");
 
-local name, SpeedyMount = ...;
+local name, sm = ...;
 local options  = {
     name = "SpeedyMount",
-    handler = Addon,
-    type = "group",
+    handler = SpeedyMount,
+    type = 'group',
     args = {
         gloves = {
             type = "input",
@@ -42,12 +42,12 @@ do
 	local convert = { enGB = "enUS", esES = "esMX", itIT = "enUS" };
 	local gameLocale = convert[locale] or locale or "enUS";
 
-	function Addon:GetLocale()
+	function SpeedyMount:GetLocale()
 		return gameLocale;
 	end
 end
 
-function Addon:OnEnable()
+function SpeedyMount:OnEnable()
     -- Events
     self:RegisterEvent("PLAYER_ENTERING_WORLD");
     self:RegisterEvent("UNIT_AURA");
@@ -57,34 +57,46 @@ function Addon:OnEnable()
   
     -- Addon Loaded
     self:Print("Type /sm for Options");
-    SpeedyMount.HasMount();
+    sm.HasMount();
 end
 
-function Addon:OnInitialize()
+function SpeedyMount:OnInitialize()
     -- Register the Database
     self.db = LibStub("AceDB-3.0"):New("SpeedyMountDB", defaults, true);
 
-    if Addon.db.profile.riding == nil then
-        Addon.db.profile.riding = {};
+    if SpeedyMount.db.profile.riding == nil then
+        SpeedyMount.db.profile.riding = {
+          gloves = { nil, 10 },
+          boots = { nil, 8 },
+          trinket = { nil, 14 }
+        };
     end
 
-    if Addon.db.profile.normal == nil then
-        Addon.db.profile.normal = {};
+    if SpeedyMount.db.profile.normal == nil then
+        SpeedyMount.db.profile.normal = {
+          gloves = { nil, 10 },
+          boots = { nil, 8 },
+          trinket = { nil, 14 }
+        };
     end
 
-    if Addon.db.profile.inRidingGear == nil then
-        Addon.db.profile.inRidingGear = false;
+    if SpeedyMount.db.profile.inRidingGear == nil then
+        SpeedyMount.db.profile.inRidingGear = false;
     end
 
-    if Addon.db.profile.swapGearAfterCombat == nil then
-        Addon.db.profile.swapGearAfterCombat = false;
+    if SpeedyMount.db.profile.swapGearAfterCombat == nil then
+        SpeedyMount.db.profile.swapGearAfterCombat = false;
     end
 
     LibStub("AceConfig-3.0"):RegisterOptionsTable("SpeedyMount", options);
     self:RegisterChatCommand("sm", "ChatCommand");
 end
 
-function Addon:ChatCommand(input)
+function SpeedyMount:DisplayMessage(item, name)
+  return print("|cff1683d1SpeedyMount|r: ", item, " was updated to ", name);
+end
+
+function SpeedyMount:ChatCommand(input)
   if not input or input:trim() == "" then
     print("|cff1683d1SpeedyMount|r Options:");
     print("    /sm (gloves | boots | trinket) (item link | item name | item id)");
@@ -93,52 +105,52 @@ function Addon:ChatCommand(input)
   end
 end
 
-function Addon:PLAYER_ENTERING_WORLD()
-  SpeedyMount.HasMount();
+function SpeedyMount:PLAYER_ENTERING_WORLD()
+  sm.HasMount();
 end
 
-function Addon:UNIT_AURA()
+function SpeedyMount:UNIT_AURA()
   local inLockdown = InCombatLockdown();
 
   if inLockdown then
-    if Addon.db.profile.inRidingGear then
-      Addon.db.profile.swapGearAfterCombat = true;
+    if SpeedyMount.db.profile.inRidingGear then
+      SpeedyMount.db.profile.swapGearAfterCombat = true;
     end
   else
-    SpeedyMount.HasMount();
+    sm.HasMount();
   end
 end
 
-function Addon:PLAYER_REGEN_ENABLED()
-  if Addon.db.profile.swapGearAfterCombat then
-    SpeedyMount.HasMount();
-    Addon.db.profile.swapGearAfterCombat = false;
+function SpeedyMount:PLAYER_REGEN_ENABLED()
+  if SpeedyMount.db.profile.swapGearAfterCombat then
+    sm.HasMount();
+    SpeedyMount.db.profile.swapGearAfterCombat = false;
   end
 end
 
-function Addon:PLAYER_UNGHOST()
-  SpeedyMount.HasMount();
+function SpeedyMount:PLAYER_UNGHOST()
+  sm.HasMount();
 end
 
-function Addon:PLAYER_ALIVE()
-  SpeedyMount.HasMount();
+function SpeedyMount:PLAYER_ALIVE()
+  sm.HasMount();
 end
 
 --------------------------------------------------
 ---  Getters and Setters
 --------------------------------------------------
-function Addon:SetGloves(_, value)
-  SpeedyMount.SetGloves(value);
+function SpeedyMount:SetGloves(_, value)
+    sm.SetGloves(value);
 end
 
-function Addon:SetBoots(_, value)
-  SpeedyMount.SetBoots(value);
+function SpeedyMount:SetBoots(_, value)
+    sm.SetBoots(value);
 end
 
-function Addon:SetTrinket(_, value)
-  SpeedyMount.SetTrinket(value);
+function SpeedyMount:SetTrinket(_, value)
+    sm.SetTrinket(value);
 end
 
-function Addon:Reset()
-  SpeedyMount.Reset();
+function SpeedyMount:Reset()
+  sm.Reset();
 end

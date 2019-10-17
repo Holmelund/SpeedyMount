@@ -1,4 +1,4 @@
-local name, SpeedyMount = ...;
+local name, sm = ...;
 local L = LibStub("AceLocale-3.0"):GetLocale("SpeedyMount");
 
 local mounts = {
@@ -86,4 +86,4 @@ function GetMounts()
     return mounts;
 end
 
-SpeedyMount.GetMounts = GetMounts;
+sm.GetMounts = GetMounts;

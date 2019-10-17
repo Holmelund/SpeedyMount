@@ -1,4 +1,4 @@
-local name, SpeedyMount = ...;
+local name, sm = ...;
 local debug = false;
 
 --------------------------------------------------
@@ -38,12 +38,12 @@ local function PerformItemChanges(input)
   end
 
   if input == normal then
-    items = Addon.db.profile.normal;
+    items = SpeedyMount.db.profile.normal;
   elseif input == riding then
-    items = Addon.db.profile.riding;
+    items = SpeedyMount.db.profile.riding;
   end
-
-  if (input == normal and Addon.db.profile.inRidingGear) or (input == riding and not Addon.db.profile.inRidingGear) then
+  
+  if (input == normal and SpeedyMount.db.profile.inRidingGear) or (input == riding and not SpeedyMount.db.profile.inRidingGear) then
     for i, item in pairs(items) do
       if debug then
         print(item[1])
@@ -57,37 +57,37 @@ local function PerformItemChanges(input)
     end
   end
   
-  if input == riding and not Addon.db.profile.inRidingGear then
-    if (gloves[1] ~= nil) and (gloves[1] ~= Addon.db.profile.riding.gloves[1]) and (gloves[1] ~= Addon.db.profile.normal.gloves[1]) then
+  if input == riding and not SpeedyMount.db.profile.inRidingGear then
+    if (gloves[1] ~= nil) and (gloves[1] ~= SpeedyMount.db.profile.riding.gloves[1]) and (gloves[1] ~= SpeedyMount.db.profile.normal.gloves[1]) then
       if debug then
         print("Normal gloves changed to: ", gloves[1]);
       end
 
-      Addon.db.profile.normal.gloves[1] = gloves[1];
+      SpeedyMount.db.profile.normal.gloves[1] = gloves[1];
     end
 
-    if (boots[1] ~= nil) and (boots[1] ~= Addon.db.profile.riding.boots[1]) and (boots[1] ~= Addon.db.profile.normal.boots[1]) then
+    if (boots[1] ~= nil) and (boots[1] ~= SpeedyMount.db.profile.riding.boots[1]) and (boots[1] ~= SpeedyMount.db.profile.normal.boots[1]) then
       if debug then
         print("Normal boots changed to: ", boots[1]);
       end
 
-      Addon.db.profile.normal.boots[1] = boots[1];
+      SpeedyMount.db.profile.normal.boots[1] = boots[1];
     end
 
-    if (trinket[1] ~= nil) and (trinket[1] ~= Addon.db.profile.riding.trinket[1]) and (trinket[1] ~= Addon.db.profile.normal.tinket[1]) then
+    if (trinket[1] ~= nil) and (trinket[1] ~= SpeedyMount.db.profile.riding.trinket[1]) and (trinket[1] ~= SpeedyMount.db.profile.normal.trinket[1]) then
       if debug then
         print("Normal trinket changed to: ", trinket[1]);
       end
 
-      Addon.db.profile.normal.tinket[1] = trinket[1];
+      SpeedyMount.db.profile.normal.trinket[1] = trinket[1];
     end
   end
 
   if count == 3 then
     if input == normal then
-      Addon.db.profile.inRidingGear = false;
+      SpeedyMount.db.profile.inRidingGear = false;
     elseif input == riding then
-      Addon.db.profile.inRidingGear = true;
+      SpeedyMount.db.profile.inRidingGear = true;
     end
   end
 end
@@ -98,7 +98,7 @@ function HasMount()
   end
 
   local hasMount = false;
-  local mounts = SpeedyMount.GetMounts();
+  local mounts = sm.GetMounts();
 
   for i=1, 40 do
     local name = UnitBuff("player", i);
@@ -110,14 +110,14 @@ function HasMount()
     for j, mount in ipairs(mounts) do
       if name == mount then
         hasMount = true;
-        if not Addon.db.profile.inRidingGear then
+        if not SpeedyMount.db.profile.inRidingGear then
           if debug then
             print("I have a steed");
           end
 
           PerformItemChanges(riding);
         end
-
+        
         return;
       else
         hasMount = false;
@@ -126,23 +126,17 @@ function HasMount()
   end
 
   if not hasMount then
-    if Addon.db.profile.inRidingGear then
+    if SpeedyMount.db.profile.inRidingGear then
       if debug then
         print("walking sim 9000");
       end
 
       PerformItemChanges(normal);
-
-      return;
     end
   end
 end
 
-SpeedyMount.HasMount = HasMount;
-
-local function DisplayMessage(item, name)
-  return print("|cff1683d1SpeedyMount|r: ", item, " was updated to ", name);
-end
+sm.HasMount = HasMount;
 
 --------------------------------------------------
 ---  Getters and Setters
@@ -152,36 +146,36 @@ function SetGloves(value)
   local name = select(1, GetItemInfo(id));
 
   if name ~= nil then
-    Addon.db.profile.riding.gloves = { name, 10 };
-    DisplayMessage("Gloves", name);
+    SpeedyMount.db.profile.riding.gloves = { name, 10 };
+    SpeedyMount:DisplayMessage("Gloves", name);
   end
 end
 
-SpeedyMount.SetGloves = SetGloves;
+sm.SetGloves = SetGloves;
 
 function SetBoots(value)
   local id = GetItemInfoInstant(value);
   local name = select(1, GetItemInfo(id));
 
   if name ~= nil then
-    Addon.db.profile.riding.boots = { name, 8 };
-    DisplayMessage("Boots", name);
+    SpeedyMount.db.profile.riding.boots = { name, 8 };
+    SpeedyMount:DisplayMessage("Boots", name);
   end
 end
 
-SpeedyMount.SetBoots = SetBoots;
+sm.SetBoots = SetBoots;
 
 function SetTrinket(value)
   local id = GetItemInfoInstant(value);
   local name = select(1, GetItemInfo(id));
 
   if name ~= nil then
-    Addon.db.profile.riding.trinket = { name, 14 };
-    DisplayMessage("Trinket", name);
+    SpeedyMount.db.profile.riding.trinket = { name, 14 };
+    SpeedyMount:DisplayMessage("Trinket", name);
   end
 end
 
-SpeedyMount.SetTrinket = SetTrinket;
+sm.SetTrinket = SetTrinket;
 
 function Reset()
   if debug then
@@ -192,4 +186,4 @@ function Reset()
   PerformItemChanges(normal);
 end
 
-SpeedyMount.Reset = Reset;
+sm.Reset = Reset;
