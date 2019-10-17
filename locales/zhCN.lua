@@ -1,5 +1,9 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("SpeedyMount", "zhCN");
 
+if not L then
+    return;
+end
+
  -- neutral
 L["Swift Razzashi Raptor"] = "拉扎什迅猛龙";
 L["Swift Zulian Tiger"] = "迅捷祖利安猛虎";
