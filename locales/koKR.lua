@@ -22,7 +22,7 @@ L["Black Battlestrider"] = "검은 전투기계타조";
 L["Black War Wolf"] = "검은 전투늑대";
 L["Red Skeletal Warhorse"] = "붉은 전투해골마";
 L["Black War Kodo"] = "검은 전투코도";
-L["Black War Raptor"] = "검은 전투랩터";
+L["Whistle of the Black War Raptor"] = "검은 전투랩터";
 
  -- class
 L["Summon Felsteed"] = "지옥마 소환";
