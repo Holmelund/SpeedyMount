@@ -20,7 +20,7 @@ L["Black War Ram"] = "검은 전투산양";
 L["Reins of the Black War Tiger"] = "검은 전투호랑이";
 L["Black Battlestrider"] = "검은 전투기계타조";
 L["Black War Wolf"] = "검은 전투늑대";
-L["Red Skeletal Warhorse"] "붉은 전투해골마";
+L["Red Skeletal Warhorse"] = "붉은 전투해골마";
 L["Black War Kodo"] = "검은 전투코도";
 L["Black War Raptor"] = "검은 전투랩터";
 
