@@ -14,6 +14,16 @@ L["Winterspring Frostsaber"] = "겨울빙호";
 L["Stormpike Battle Charger"] = "스톰파이크 전투산양";
 L["Frostwolf Howler"] = "전투 서리늑대";
 
+-- pvp rank 11
+L["Black War Steed Bridle"] = "검은 전투군마";
+L["Black War Ram"] = "검은 전투산양";
+L["Reins of the Black War Tiger"] = "검은 전투호랑이";
+L["Black Battlestrider"] = "검은 전투기계타조";
+L["Black War Wolf"] = "검은 전투늑대";
+L["Red Skeletal Warhorse"] = "붉은 전투해골마";
+L["Black War Kodo"] = "검은 전투코도";
+L["Whistle of the Black War Raptor"] = "검은 전투랩터";
+
  -- class
 L["Summon Felsteed"] = "지옥마 소환";
 L["Summon Dreadsteed"] = "공포마 소환";
